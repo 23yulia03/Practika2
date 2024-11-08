@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Practika</string>
+    <string name="btn_services">Услуги</string>
+    <string name="btn_appointment">Записаться на прием</string>
+    <string name="edit_name_hint">Введите ваше имя</string>
+    <string name="edit_phone_hint">Введите номер телефона</string>
+    <string name="btn_submit">Записаться</string>
+    <string name="contact_info_title">Контактная информация</string>
+    <string name="services_title">Наши услуги:</string>
+    <string name="service_1">1. Чистка зубов</string>
+    <string name="service_2">2. Лечение кариеса</string>
+    <string name="service_3">3. Имплантация зубов</string>
+    <string name="service_4">4. Отбеливание зубов</string>
+
+    <!-- Массив услуг для Spinner -->
+    <string-array name="services_array">
+        <item>Чистка зубов</item>
+        <item>Лечение кариеса</item>
+        <item>Имплантация зубов</item>
+        <item>Отбеливание зубов</item>
+    </string-array>
+</resources>

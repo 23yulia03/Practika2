@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <id name="spinner_specialist" />
+    <id name="text_fullName" />
+    <id name="text_birthDate" />
+</resources>

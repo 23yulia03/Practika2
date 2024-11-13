@@ -1,5 +1,6 @@
 package com.example.practika;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,10 +21,11 @@ public class AppointmentActivity extends AppCompatActivity {
     TextInputEditText editName, editPhone;
     DatePicker datePicker;
     TimePicker timePicker;
-    Spinner spinnerService;
+    Spinner spinnerService, spinnerSpecialist;
     MaterialButton btnSubmit;
     DBHelper dbHelper;
 
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +37,20 @@ public class AppointmentActivity extends AppCompatActivity {
         datePicker = findViewById(R.id.date_picker);
         timePicker = findViewById(R.id.time_picker);
         spinnerService = findViewById(R.id.spinner_service);
+        spinnerSpecialist = findViewById(R.id.spinner_specialist);
         btnSubmit = findViewById(R.id.btn_submit);
         dbHelper = new DBHelper(this);
 
         // Заполнение Spinner данными
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> serviceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.services_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerService.setAdapter(adapter);
+        serviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerService.setAdapter(serviceAdapter);
+
+        ArrayAdapter<CharSequence> specialistAdapter = ArrayAdapter.createFromResource(this,
+                R.array.specialists_array, android.R.layout.simple_spinner_item);
+        specialistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSpecialist.setAdapter(specialistAdapter);
 
         // Установка обработчика нажатия на кнопку
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +65,7 @@ public class AppointmentActivity extends AppCompatActivity {
         String name = editName.getText().toString();
         String phone = editPhone.getText().toString();
         String service = spinnerService.getSelectedItem().toString();
+        String specialist = spinnerSpecialist.getSelectedItem().toString();
 
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth() + 1;
@@ -75,11 +84,11 @@ public class AppointmentActivity extends AppCompatActivity {
             // Подтверждение записи
             new AlertDialog.Builder(AppointmentActivity.this)
                     .setTitle("Подтверждение записи")
-                    .setMessage("Вы уверены, что хотите записаться на " + service + " на дату " + day + "/" + month + "/" + year + " в " + hour + ":" + minute + "?")
+                    .setMessage("Вы уверены, что хотите записаться на " + service + " к " + specialist + " на дату " + day + "/" + month + "/" + year + " в " + hour + ":" + minute + "?")
                     .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            saveAppointment(name, phone, service, day + "/" + month + "/" + year, hour + ":" + minute);
+                            saveAppointment(name, phone, service, day + "/" + month + "/" + year, hour + ":" + minute, specialist);
                         }
                     })
                     .setNegativeButton("Отмена", null)
@@ -87,8 +96,8 @@ public class AppointmentActivity extends AppCompatActivity {
         }
     }
 
-    private void saveAppointment(String name, String phone, String service, String date, String time) {
-        boolean isInserted = dbHelper.insertAppointment(name, phone, service, date, time);
+    private void saveAppointment(String name, String phone, String service, String date, String time, String specialist) {
+        boolean isInserted = dbHelper.insertAppointment(name, phone, service, date, time, specialist);
 
         if (isInserted) {
             Toast.makeText(this, "Запись успешно сохранена!", Toast.LENGTH_SHORT).show();

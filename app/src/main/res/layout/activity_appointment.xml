@@ -35,6 +35,22 @@
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Выбор услуги -->
+        <Spinner
+            android:id="@+id/spinner_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp" />
+
+        <!-- Выбор специалиста -->
+        <Spinner
+            android:id="@+id/spinner_specialist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp" />
+
         <!-- Выбор даты -->
         <DatePicker
             android:id="@+id/date_picker"
@@ -49,13 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:timePickerMode="spinner" />
-
-        <!-- Выбор услуги -->
-        <Spinner
-            android:id="@+id/spinner_service"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
 
         <!-- Кнопка записи -->
         <com.google.android.material.button.MaterialButton

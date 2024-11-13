@@ -11,6 +11,7 @@
     <string name="service_2">2. Лечение кариеса</string>
     <string name="service_3">3. Имплантация зубов</string>
     <string name="service_4">4. Отбеливание зубов</string>
+    <string name="action_profile">Профиль</string>
 
     <!-- Массив услуг для Spinner -->
     <string-array name="services_array">
@@ -18,5 +19,13 @@
         <item>Лечение кариеса</item>
         <item>Имплантация зубов</item>
         <item>Отбеливание зубов</item>
+    </string-array>
+
+    <!-- Массив специалистов для Spinner -->
+    <string-array name="specialists_array">
+        <item>Иванов Иван</item>
+        <item>Петров Петр</item>
+        <item>Сидоров Сидор</item>
+        <item>Кузнецов Кузьма</item>
     </string-array>
 </resources>

@@ -40,4 +40,11 @@
         android:layout_height="wrap_content"
         android:text="Время"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_specialist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Специалист"
+        android:textSize="16sp" />
 </LinearLayout>

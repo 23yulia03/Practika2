@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -89,18 +90,40 @@ public class DBHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") String birthDate = cursor.getString(cursor.getColumnIndex("birthDate"));
             @SuppressLint("Range") String gender = cursor.getString(cursor.getColumnIndex("gender"));
 
+            Log.d("DBHelper", "User found: " + fullName + ", " + birthDate + ", " + gender);
+
             // Получение записи пользователя
             Appointment appointment = getAppointmentByUserId(id);
 
+            cursor.close();
             return new User(fullName, birthDate, gender, appointment);
         }
 
         cursor.close();
+        Log.d("DBHelper", "User not found for id: " + id);
         return null;
     }
 
     private Appointment getAppointmentByUserId(int userId) {
-        // Логика получения записи пользователя
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Appointments WHERE userId = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
+            @SuppressLint("Range") String phone = cursor.getString(cursor.getColumnIndex("phone"));
+            @SuppressLint("Range") String service = cursor.getString(cursor.getColumnIndex("service"));
+            @SuppressLint("Range") String date = cursor.getString(cursor.getColumnIndex("date"));
+            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
+            @SuppressLint("Range") String specialist = cursor.getString(cursor.getColumnIndex("specialist"));
+
+            Log.d("DBHelper", "Appointment found: " + service + ", " + date + ", " + time);
+
+            cursor.close();
+            return new Appointment(name, phone, service, date, time, specialist);
+        }
+
+        cursor.close();
+        Log.d("DBHelper", "Appointment not found for userId: " + userId);
         return null;
     }
 

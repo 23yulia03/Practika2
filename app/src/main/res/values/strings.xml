@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practika</string>
+    <string name="app_name">Стоматология</string>
     <string name="btn_services">Услуги</string>
     <string name="btn_appointment">Записаться на прием</string>
     <string name="edit_name_hint">Введите ваше имя</string>

@@ -1,9 +1,13 @@
 package com.example.practika;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +17,11 @@ import java.util.List;
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
 
     private List<Appointment> appointmentList;
+    private Context context;
 
-    public AppointmentAdapter(List<Appointment> appointmentList) {
+    public AppointmentAdapter(List<Appointment> appointmentList, Context context) {
         this.appointmentList = appointmentList;
+        this.context = context;
     }
 
     @NonNull
@@ -34,6 +40,25 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.textDate.setText(appointment.getDate());
         holder.textTime.setText(appointment.getTime());
         holder.textSpecialist.setText(appointment.getSpecialist());
+
+        // Удаление записи
+        holder.btnDelete.setOnClickListener(v -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("Отмена записи")
+                    .setMessage("Вы уверены, что хотите отменить запись?")
+                    .setPositiveButton("Да", (dialog, which) -> {
+                        DBHelper dbHelper = new DBHelper(context);
+                        if (dbHelper.deleteAppointment(position + 1)) { // Пример: ID записи берется по позиции + 1
+                            appointmentList.remove(position);
+                            notifyItemRemoved(position);
+                            Toast.makeText(context, "Запись отменена", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Ошибка при отмене записи", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Отмена", null)
+                    .show();
+        });
     }
 
     @Override
@@ -43,6 +68,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     public static class AppointmentViewHolder extends RecyclerView.ViewHolder {
         TextView textName, textPhone, textService, textDate, textTime, textSpecialist;
+        Button btnDelete;
 
         public AppointmentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +78,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             textDate = itemView.findViewById(R.id.text_date);
             textTime = itemView.findViewById(R.id.text_time);
             textSpecialist = itemView.findViewById(R.id.text_specialist);
+            btnDelete = itemView.findViewById(R.id.btn_delete); // Кнопка удаления
         }
     }
 }

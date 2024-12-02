@@ -157,4 +157,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return hexString.toString();
     }
+
+    public boolean deleteAppointment(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("Appointments", "id = ?", new String[]{String.valueOf(id)});
+        return result > 0;
+    }
+
 }

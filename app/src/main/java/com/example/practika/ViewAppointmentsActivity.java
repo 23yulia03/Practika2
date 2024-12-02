@@ -25,7 +25,7 @@ public class ViewAppointmentsActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         List<Appointment> appointmentList = dbHelper.getAllAppointments();
 
-        adapter = new AppointmentAdapter(appointmentList);
+        adapter = new AppointmentAdapter(appointmentList, this); // Передаем контекст
         recyclerView.setAdapter(adapter);
     }
 }

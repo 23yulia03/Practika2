@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Стоматология</string>
     <string name="btn_services">Услуги</string>
@@ -12,20 +13,6 @@
     <string name="service_3">3. Имплантация зубов</string>
     <string name="service_4">4. Отбеливание зубов</string>
     <string name="action_profile">Профиль</string>
-
-    <!-- Массив услуг для Spinner -->
-    <string-array name="services_array">
-        <item>Чистка зубов</item>
-        <item>Лечение кариеса</item>
-        <item>Имплантация зубов</item>
-        <item>Отбеливание зубов</item>
-    </string-array>
-
-    <!-- Массив специалистов для Spinner -->
-    <string-array name="specialists_array">
-        <item>Иванов Иван</item>
-        <item>Петров Петр</item>
-        <item>Сидоров Сидор</item>
-        <item>Кузнецов Кузьма</item>
-    </string-array>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
 </resources>

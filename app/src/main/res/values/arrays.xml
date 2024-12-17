@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Массив услуг для Spinner -->
+    <string-array name="services_array">
+        <item>Чистка зубов</item>
+        <item>Лечение кариеса</item>
+        <item>Имплантация зубов</item>
+        <item>Отбеливание зубов</item>
+    </string-array>
+
+    <!-- Массив специалистов для Spinner -->
+    <string-array name="specialists_array">
+        <item>Иванов Иван</item>
+        <item>Петров Петр</item>
+        <item>Сидоров Сидор</item>
+        <item>Кузнецов Кузьма</item>
+    </string-array>
+</resources>

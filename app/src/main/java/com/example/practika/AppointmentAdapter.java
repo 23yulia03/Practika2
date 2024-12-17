@@ -1,6 +1,5 @@
 package com.example.practika;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,21 +42,14 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         // Удаление записи
         holder.btnDelete.setOnClickListener(v -> {
-            new AlertDialog.Builder(context)
-                    .setTitle("Отмена записи")
-                    .setMessage("Вы уверены, что хотите отменить запись?")
-                    .setPositiveButton("Да", (dialog, which) -> {
-                        DBHelper dbHelper = new DBHelper(context);
-                        if (dbHelper.deleteAppointment(position + 1)) { // Пример: ID записи берется по позиции + 1
-                            appointmentList.remove(position);
-                            notifyItemRemoved(position);
-                            Toast.makeText(context, "Запись отменена", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, "Ошибка при отмене записи", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("Отмена", null)
-                    .show();
+            DBHelper dbHelper = new DBHelper(context);
+            if (dbHelper.deleteAppointment(position + 1)) { // Пример: ID записи берется по позиции + 1
+                appointmentList.remove(position);
+                notifyItemRemoved(position);
+                Toast.makeText(context, "Запись отменена", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Ошибка при отмене записи", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -78,7 +70,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             textDate = itemView.findViewById(R.id.text_date);
             textTime = itemView.findViewById(R.id.text_time);
             textSpecialist = itemView.findViewById(R.id.text_specialist);
-            btnDelete = itemView.findViewById(R.id.btn_delete); // Кнопка удаления
+            btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }
 }

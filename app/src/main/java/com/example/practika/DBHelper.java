@@ -39,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "password";
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_DATE + " TEXT, "
                 + COLUMN_TIME + " TEXT, "
                 + COLUMN_SPECIALIST + " TEXT, "
-                + COLUMN_USER_ID + " INTEGER)";
+                + COLUMN_USER_ID + " INTEGER)"; // Добавляем столбец userId
         db.execSQL(createAppointmentsTable);
 
         // Создание таблицы пользователей
@@ -85,6 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TIME, time);
         contentValues.put(COLUMN_SPECIALIST, specialist);
         contentValues.put(COLUMN_USER_ID, userId);
+
 
         long result = db.insert(TABLE_APPOINTMENTS, null, contentValues);
         return result != -1; // Возвращаем true, если запись успешно добавлена

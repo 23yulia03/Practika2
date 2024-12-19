@@ -132,8 +132,9 @@ public class AppointmentActivity extends AppCompatActivity implements Navigation
         int userId = getIntent().getIntExtra("userId", -1);
 
         if (userId == -1) {
-            Toast.makeText(this, "Ошибка: ID пользователя не найден", Toast.LENGTH_SHORT).show();
-            return;
+            // Если userId не передан, используем фиктивное значение для тестирования
+            userId = 1; // Замените на реальный userId после тестирования
+            Toast.makeText(this, "Ошибка: ID пользователя не найден. Используем фиктивное значение.", Toast.LENGTH_SHORT).show();
         }
 
         boolean isInserted = dbHelper.insertAppointment(name, phone, service, date, time, specialist, userId);
